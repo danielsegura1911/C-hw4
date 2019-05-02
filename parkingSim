@@ -1,0 +1,120 @@
+#include <iostream>
+
+
+class parkedcar {
+private:
+	std::string make;
+	std::string model;
+	std::string color;
+	std::string liscence;
+	int minutesSpentParked;
+
+public:
+	parkedcar(std::string mak, std::string mod, std::string c, std::string lisc){
+		make = mak;
+		model = mod;
+		color = c;
+		liscence = lisc;
+		minutesSpentParked = 0;
+	}
+
+	std::string getmake() {
+		return make;
+	}
+
+	std::string getmodel() {
+		return model;
+	}
+
+	std::string getcolor() {
+		return color;
+	}
+
+	std::string getliscence() {
+		return liscence;
+	}
+
+	int getmsp() {
+		return minutesSpentParked;
+	}
+
+	void setmsp(int msp) {
+		minutesSpentParked = msp;
+	}
+
+};
+
+
+class parkingmeter {
+private:
+	int time;
+
+public:
+	parkingmeter(int t) {
+		time = t;
+	}
+
+	int getTime() {
+		return time;
+	}
+};
+
+class parkingticket {
+private:
+	std::string badgeNumber;
+	std::string officername;
+	int time;
+
+public:
+	parkingticket(std::string on, std::string bn, int t) {
+		badgeNumber = bn;
+		officername = on;
+		time = t;
+	}
+
+	int getticket() {
+		return 25 + (((time - 1)%1)*20);
+	}
+
+	std::string getbadge() {
+		return badgeNumber;
+	}
+
+	std::string getname() {
+		return officername;
+	}
+
+
+};
+
+class policeofficer {
+private:
+	std::string officername;
+	std::string badgenumber;
+
+public:
+	policeofficer(std::string on, std::string bn) {
+		officername = on;
+		badgenumber = bn;
+	}
+
+	int examParking(int timeCar, int timeMeter) {
+		if (timeCar < timeMeter || timeCar == timeMeter) {
+			std::cout << "No ticket generated";
+		
+		}
+		else {
+			int time = timeCar - timeMeter;
+			parkingticket(officername, badgenumber, time);
+
+		}
+	}
+};
+
+int main() {
+	parkedcar Toyota ("Toyota", "Tocoma", "White", "9v2h0hv");
+	Toyota.setmsp(15);
+	parkingmeter meter (20);
+	policeofficer Brad("Brad", "123");
+	Brad.examParking(Toyota.getmsp, meter.getTime);
+}
