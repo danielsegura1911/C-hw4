@@ -1,0 +1,69 @@
+#include <iostream>
+#include <stdlib.h>
+#include <ctime>
+#include <cstdlib>
+class dice{
+private:
+    int d6 = (rand()%6) + 1;
+public:
+    dice(){
+    }
+
+    int roll(){
+        return d6;
+    }
+;
+
+};
+
+
+
+int game(){
+    dice dice1;
+    int i;
+    int playernum = 0;
+    int housenum = 0;
+    int check = 0;
+    while(check == 0){
+        int result1 = dice1.roll();
+        int result2 = dice1.roll();
+        playernum = result1 + result2 + playernum;
+        result1 = dice1.roll();
+        result2 = dice1.roll();
+        housenum = result1 + result2 + housenum;
+        std::cout << "your number is " << playernum;
+        if(playernum > 21){
+            std::cout << playernum << " you busted!" ;
+            check = 1;
+        }
+        if (housenum > 21){
+            std::cout << housenum << " house busted!" ;
+            check = 1;
+        }
+        std::cout << " roll again?";
+        std::cout << " 1: yes" ;
+        std::cout << " 0: no" ;
+        scanf("%i", &i);
+        if(i == 1) {
+            if (playernum > housenum) {
+                std::cout << "your number is " << playernum;
+                std::cout << "house number is " << housenum;
+                std::cout << "you win";
+                check = 1;
+            }
+            if (playernum < housenum) {
+                std::cout << "your number is " << playernum;
+                std::cout << "house number is " << housenum;
+                std::cout << "you lose";
+                check = 1;
+            }
+            check = 1;
+        }
+    }
+return 0;
+}
+
+int main() {
+game();
+
+}
